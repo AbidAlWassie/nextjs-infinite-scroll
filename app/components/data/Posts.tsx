@@ -5,6 +5,12 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
+interface Post {
+  id: number;
+  title: string;
+  body: string;
+}
+
 export default function Posts() {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfinitePosts();
@@ -26,8 +32,8 @@ export default function Posts() {
   return (
     <div>
       <ul className="space-y-4">
-        {data?.pages.map((page, i) =>
-          page.map((post: any) => (
+        {data?.pages.map((page) =>
+          page.map((post: Post) => (
             <li key={post.id} className="border p-4 rounded-lg">
               <Image
                 src={`https://holdmyimage.netlify.app/api/image/1280x720/1f788e/e7edee?text=${encodeURIComponent(
